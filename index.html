@@ -287,13 +287,10 @@
       without pressure, without noise, and without false promises.
     </p>
 
-    <a
-      href="Stock Market_ A Self-Explanatory Guide to Candlestick and Chart Patterns.pdf"
-      download="Stock Market_ A Self-Explanatory Guide to Candlestick and Chart Patterns.pdf"
-      class="btn downloadBtn"
-    >
-      Download the Free Beginner Guide
-    </a>
+   <button class="btn" id="payBtn">
+  Pay ₹99 & Download Beginner Guide
+    </button>
+
 
     <p class="timer">
       Free access ends in <span id="countdownBottom">10:00</span>
@@ -346,6 +343,51 @@
   topBtn.addEventListener("click", () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
+</script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+  const payBtn = document.getElementById("payBtn");
+
+  payBtn.onclick = async function () {
+    // 1. Create order from backend
+    const res = await fetch("/create-order", { method: "POST" });
+    const order = await res.json();
+
+    const options = {
+      key: "RAZORPAY_KEY_ID", // public key
+      amount: order.amount,
+      currency: "INR",
+      name: "Stock Market Beginner Guide",
+      description: "Candlestick & Chart Patterns",
+      order_id: order.id,
+
+      handler: async function (response) {
+        // 2. Verify payment
+        const verify = await fetch("/verify-payment", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(response)
+        });
+
+        const result = await verify.json();
+
+        if (result.status === "success") {
+          // 3. Trigger download
+          window.location.href =
+            "/download/Stock Market_ A Self-Explanatory Guide to Candlestick and Chart Patterns.pdf";
+        } else {
+          alert("Payment verification failed");
+        }
+      },
+
+      theme: {
+        color: "#FACC15"
+      }
+    };
+
+    const rzp = new Razorpay(options);
+    rzp.open();
+  };
 </script>
 
 </body>
