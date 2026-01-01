@@ -119,10 +119,24 @@
       font-size:.85rem;
       color:var(--muted);
     }
+    /* Scroll Progress Bar */
+#scrollProgress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 4px;
+  background: var(--yellow);
+  z-index: 9999;
+  transition: width 0.1s linear;
+}
+
   </style>
 </head>
 
 <body>
+  <div id="scrollProgress"></div>
+
 
 <!-- HERO -->
 <section class="hero container">
@@ -285,6 +299,15 @@ if (countdownBottomEl) {
 
     time--;
   }, 1000);
+  const scrollProgress = document.getElementById("scrollProgress");
+
+window.addEventListener("scroll", () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const scrollPercent = (scrollTop / docHeight) * 100;
+  scrollProgress.style.width = `${scrollPercent}%`;
+});
+
 </script>
 </body>
 </html>
