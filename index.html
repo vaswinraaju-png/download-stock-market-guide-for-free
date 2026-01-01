@@ -61,23 +61,10 @@
     }
     .btn:hover { background:var(--yellow-hover); transform:translateY(-2px); }
 
-    .btn.disabled {
-      background:#999;
-      cursor:not-allowed;
-      pointer-events:none;
-    }
-
     .hero { text-align:center; padding-top:5.5rem; }
     .price { margin-top:1rem; font-size:1.1rem; }
     .price del { color:var(--muted); margin-right:.5rem; }
     .price span { color:var(--green); font-size:1.5rem; font-weight:800; }
-
-    .timer {
-      margin-top:1rem;
-      font-weight:700;
-      color:var(--red);
-      font-size:1.1rem;
-    }
 
     .dark { background:var(--charcoal); }
 
@@ -119,10 +106,42 @@
       font-size:.85rem;
       color:var(--muted);
     }
+
+    /* SCROLL PROGRESS BAR */
+    #progressBar {
+      position:fixed;
+      top:0;
+      left:0;
+      height:4px;
+      background:var(--yellow);
+      width:0%;
+      z-index:9999;
+    }
+
+    /* SCROLL TO TOP */
+    #scrollTopBtn {
+      position:fixed;
+      bottom:24px;
+      right:24px;
+      background:var(--yellow);
+      color:var(--navy);
+      border:none;
+      border-radius:50%;
+      width:48px;
+      height:48px;
+      font-size:20px;
+      font-weight:700;
+      cursor:pointer;
+      display:none;
+      box-shadow:0 10px 25px rgba(0,0,0,.35);
+      z-index:999;
+    }
   </style>
 </head>
 
 <body>
+
+<div id="progressBar"></div>
 
 <!-- HERO -->
 <section class="hero container">
@@ -140,24 +159,9 @@
     “Everyone else seems to understand this… why don’t I?”
   </div>
 
-  <!-- DOWNLOAD BUTTON -->
-  <a
-    id="downloadBtn"
-    href="Stock Market: A Self-Explanatory Guide to Candlestick and Chart Patterns.pdf"
-    download
-    class="btn"
-  >
-    Download FREE (Limited Time)
-  </a>
-
-  <!-- TIMER -->
-  <div class="timer">
-    Free access ends in <span id="countdown">10:00</span>
-  </div>
-
-  <div class="price">
-    <del>₹499</del><span>FREE for 10 minutes</span>
-  </div>
+  <a href="Stock Market: A Self-Explanatory Guide to Candlestick and Chart Patterns.pdf"
+     download
+     class="btn">Download the Beginner Guide (FREE)</a>
 </section>
 
 <!-- PAIN -->
@@ -177,49 +181,24 @@
 <section>
   <div class="container">
     <h2>What This Guide Does Differently</h2>
-
     <p>
       This ebook starts exactly where beginners struggle — not with trades,
       but with <strong>how the stock market works, how price moves, and how charts communicate information</strong>.
     </p>
-
     <div class="fomo">
       What if charts were never random — and you just weren’t taught how to read them properly?
     </div>
   </div>
 </section>
 
-<!-- CONTENT MAPPED -->
+<!-- FINAL CTA -->
 <section class="dark">
-  <div class="container">
-    <h2>What You’ll Learn (Directly From the Guide)</h2>
-    <div class="grid">
-      <div class="card"><h3>Stock Market Basics</h3><p>What markets are, why shares exist, and how trading actually happens.</p></div>
-      <div class="card"><h3>Support & Resistance</h3><p>Why price stops, reverses, or reacts at certain levels.</p></div>
-      <div class="card"><h3>Candlestick Reading</h3><p>How bullish, bearish, and indecision candles reflect buyer–seller behavior.</p></div>
-      <div class="card"><h3>Chart Patterns</h3><p>Trend continuation, reversal, and indecisive patterns explained visually.</p></div>
-      <div class="card"><h3>Market Trends</h3><p>Uptrend, downtrend, sideways — and why trading blindly fails.</p></div>
-      <div class="card"><h3>Beginner Risk Awareness</h3><p>Why paper trading, patience, and understanding come before money.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- WHO IT IS FOR -->
-<section>
-  <div class="container">
-    <h2>This Guide Is For You If…</h2>
-    <ul>
-      <li>You are completely new to stock market charts</li>
-      <li>You want to understand price before placing trades</li>
-      <li>You feel overwhelmed by indicators and strategies</li>
-      <li>You want clarity, not shortcuts</li>
-    </ul>
-
-    <h3 style="margin-top:2rem">This Guide Is NOT For You If…</h3>
-    <ul>
-      <li>You already trade daily or use advanced indicators</li>
-      <li>You are looking for signals, tips, or guaranteed profits</li>
-    </ul>
+  <div class="container" style="text-align:center">
+    <h2>Still Scrolling?</h2>
+    <p>You’re exactly the kind of beginner this guide was written for.</p>
+    <a href="Stock Market: A Self-Explanatory Guide to Candlestick and Chart Patterns.pdf"
+       download
+       class="btn">Download the Free Beginner Guide</a>
   </div>
 </section>
 
@@ -228,24 +207,24 @@
   Built for first-time learners
 </footer>
 
+<button id="scrollTopBtn" title="Back to top">↑</button>
+
 <script>
-  let time = 600; // 10 minutes
-  const countdownEl = document.getElementById("countdown");
-  const btn = document.getElementById("downloadBtn");
+  const progressBar = document.getElementById("progressBar");
+  const scrollBtn = document.getElementById("scrollTopBtn");
 
-  const timer = setInterval(() => {
-    const min = String(Math.floor(time / 60)).padStart(2, "0");
-    const sec = String(time % 60).padStart(2, "0");
-    countdownEl.textContent = `${min}:${sec}`;
+  window.addEventListener("scroll", () => {
+    const scrollTop = document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const progress = (scrollTop / height) * 100;
+    progressBar.style.width = progress + "%";
 
-    if (time <= 0) {
-      clearInterval(timer);
-      btn.textContent = "Free access ended";
-      btn.classList.add("disabled");
-    }
+    scrollBtn.style.display = scrollTop > 400 ? "block" : "none";
+  });
 
-    time--;
-  }, 1000);
+  scrollBtn.onclick = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 </script>
 
 </body>
