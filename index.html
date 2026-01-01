@@ -32,6 +32,7 @@
     }
 
     * { box-sizing:border-box; }
+
     body {
       margin:0;
       font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;
@@ -41,8 +42,13 @@
     }
 
     a { color:inherit; text-decoration:none; }
+
     section { padding:4.5rem 1.25rem; }
-    .container { max-width:var(--max); margin:auto; }
+
+    .container {
+      max-width:var(--max);
+      margin:auto;
+    }
 
     h1 { font-size:clamp(2rem,4vw,2.8rem); line-height:1.15; }
     h2 { font-size:clamp(1.6rem,3vw,2.2rem); margin-bottom:1rem; }
@@ -59,19 +65,37 @@
       font-weight:700;
       transition:.15s;
     }
-    .btn:hover { background:var(--yellow-hover); transform:translateY(-2px); }
+
+    .btn:hover {
+      background:var(--yellow-hover);
+      transform:translateY(-2px);
+    }
 
     .btn.disabled {
       background:#999;
-      cursor:not-allowed;
       pointer-events:none;
     }
 
-    .hero { text-align:center; padding-top:5.5rem; }
+    .hero {
+      text-align:center;
+      padding-top:5.5rem;
+    }
 
-    .price { margin-top:1rem; font-size:1.1rem; }
-    .price del { color:var(--muted); margin-right:.5rem; }
-    .price span { color:var(--green); font-size:1.5rem; font-weight:800; }
+    .price {
+      margin-top:1rem;
+      font-size:1.1rem;
+    }
+
+    .price del {
+      color:var(--muted);
+      margin-right:.5rem;
+    }
+
+    .price span {
+      color:var(--green);
+      font-size:1.5rem;
+      font-weight:800;
+    }
 
     .timer {
       margin-top:1rem;
@@ -80,7 +104,9 @@
       font-size:1.1rem;
     }
 
-    .dark { background:var(--charcoal); }
+    .dark {
+      background:var(--charcoal);
+    }
 
     .grid {
       display:grid;
@@ -89,14 +115,15 @@
     }
 
     .card {
-      background:var(--navy);
+      background:#0F1E33;
       padding:1.6rem;
       border-radius:var(--radius);
       border:1px solid rgba(255,255,255,.06);
     }
 
+    /* ✅ Alternate color for small text containers */
     .fomo {
-      background:var(--white));
+      background:#111827;
       border-left:4px solid var(--yellow);
       padding:1.5rem;
       margin:1.5rem 0;
@@ -241,7 +268,9 @@
       <div class="card"><h3>Beginner Risk Awareness</h3><p>Why paper trading, patience, and understanding come before money.</p></div>
     </div>
   </div>
-  <!-- FINAL CTA -->
+</section>
+
+<!-- FINAL CTA -->
 <section class="dark">
   <div class="container" style="text-align:center;">
     <h2>Still Confused by Stock Market Charts?</h2>
@@ -265,11 +294,8 @@
     </p>
   </div>
 </section>
-</section>
 
-
-
-  <footer>
+<footer>
   © 2026 · Educational Purpose Only · No Trading Advice<br>
   Built for first-time learners
 </footer>
@@ -314,10 +340,6 @@
   topBtn.addEventListener("click", () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
-  <footer>
-  © 2026 · Educational Purpose Only · No Trading Advice<br>
-  Built for first-time learners
-</footer>
 </script>
 
 </body>
