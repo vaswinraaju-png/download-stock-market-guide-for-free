@@ -1,286 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- =====================
-       BASIC META
-  ====================== -->
+  <!-- BASIC META -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0B1C2D">
 
   <title>Stock Market: A Self-Explanatory Guide to Candlestick and Chart Patterns</title>
 
-  <meta name="description" content="A beginner-friendly stock market ebook that explains candlestick and chart patterns clearly. No jargon. No confusion. Get instant access for just ₹99.">
+  <meta name="description" content="A pure beginner’s guide to understanding stock market charts, candlesticks, and patterns without confusion. No indicators. No strategies. Just clarity. ₹99 only.">
 
-  <!-- =====================
-       OPEN GRAPH (SEO)
-  ====================== -->
+  <!-- OPEN GRAPH -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Stock Market: A Self-Explanatory Guide">
-  <meta property="og:description" content="Understand candlestick & chart patterns the simple way. Beginner-friendly ebook for ₹99.">
+  <meta property="og:description" content="If charts confuse you, this beginner-only guide explains them clearly. Learn candlesticks and chart patterns from scratch.">
   <meta property="og:image" content="/og-image.png">
-  <meta property="og:url" content="https://yourdomain.com">
 
-  <!-- =====================
-       FONTS (SYSTEM FIRST)
-  ====================== -->
   <style>
     :root {
-      /* COLORS */
-      --color-bg-primary: #0B1C2D;
-      --color-bg-secondary: #0F172A;
-      --color-accent-primary: #FACC15;
-      --color-accent-hover: #EAB308;
-      --color-success: #22C55E;
-      --color-danger: #DC2626;
-
-      --color-text-primary: #FFFFFF;
-      --color-text-secondary: #CBD5E1;
-      --color-text-muted: #94A3B8;
-
-      /* UI */
-      --radius-sm: 8px;
-      --radius-md: 12px;
-      --radius-lg: 16px;
-
-      --shadow-soft: 0 10px 30px rgba(0,0,0,.25);
-      --max-width: 1120px;
+      --navy:#0B1C2D;
+      --charcoal:#0F172A;
+      --yellow:#FACC15;
+      --yellow-hover:#EAB308;
+      --green:#22C55E;
+      --red:#DC2626;
+      --white:#FFFFFF;
+      --gray:#CBD5E1;
+      --muted:#94A3B8;
+      --radius:14px;
+      --max:1100px;
     }
 
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
+    * { box-sizing:border-box; }
     body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background-color: var(--color-bg-primary);
-      color: var(--color-text-primary);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
+      margin:0;
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;
+      background:var(--navy);
+      color:var(--white);
+      line-height:1.65;
     }
 
-    img {
-      max-width: 100%;
-      display: block;
-    }
+    a { color:inherit; text-decoration:none; }
+    section { padding:4.5rem 1.25rem; }
+    .container { max-width:var(--max); margin:auto; }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    h1 { font-size:clamp(2rem,4vw,2.8rem); line-height:1.15; }
+    h2 { font-size:clamp(1.6rem,3vw,2.2rem); margin-bottom:1rem; }
+    h3 { margin-bottom:.4rem; }
 
-    .container {
-      max-width: var(--max-width);
-      margin-inline: auto;
-      padding-inline: 1.25rem;
-    }
+    p { color:var(--gray); }
 
-    /* =====================
-       BUTTONS
-    ====================== */
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem 2.25rem;
-      font-weight: 700;
-      font-size: 1.05rem;
-      border-radius: var(--radius-md);
-      background-color: var(--color-accent-primary);
-      color: var(--color-bg-primary);
-      transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
-      box-shadow: var(--shadow-soft);
+    .btn {
+      display:inline-block;
+      background:var(--yellow);
+      color:var(--navy);
+      padding:1rem 2.2rem;
+      border-radius:var(--radius);
+      font-weight:700;
+      transition:.15s;
     }
+    .btn:hover { background:var(--yellow-hover); transform:translateY(-2px); }
 
-    .btn-primary:hover,
-    .btn-primary:focus-visible {
-      background-color: var(--color-accent-hover);
-      transform: translateY(-2px);
-      outline: none;
-    }
+    .hero { text-align:center; padding-top:5.5rem; }
+    .price { margin-top:1rem; font-size:1.1rem; }
+    .price del { color:var(--muted); margin-right:.5rem; }
+    .price span { color:var(--green); font-size:1.5rem; font-weight:800; }
 
-    /* =====================
-       HEADER / HERO
-    ====================== */
-    header {
-      padding-block: 5rem 4rem;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: clamp(2rem, 4vw, 2.75rem);
-      line-height: 1.15;
-      margin-bottom: 1rem;
-    }
-
-    .hero-text {
-      max-width: 720px;
-      margin-inline: auto;
-      color: var(--color-text-secondary);
-      font-size: 1.05rem;
-    }
-
-    .price-box {
-      margin-top: 1.75rem;
-      font-size: 1.1rem;
-    }
-
-    .price-old {
-      text-decoration: line-through;
-      color: var(--color-text-muted);
-      margin-right: .5rem;
-    }
-
-    .price-new {
-      color: var(--color-success);
-      font-size: 1.5rem;
-      font-weight: 800;
-    }
-
-    /* =====================
-       FEATURES
-    ====================== */
-    section {
-      padding-block: 4rem;
-    }
-
-    .features {
-      background-color: var(--color-bg-secondary);
-    }
+    .dark { background:var(--charcoal); }
 
     .grid {
-      display: grid;
-      gap: 1.5rem;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:1.5rem;
     }
 
     .card {
-      background-color: var(--color-bg-primary);
-      padding: 1.75rem;
-      border-radius: var(--radius-lg);
-      border: 1px solid rgba(255,255,255,.06);
+      background:var(--navy);
+      padding:1.6rem;
+      border-radius:var(--radius);
+      border:1px solid rgba(255,255,255,.06);
     }
 
-    .card h3 {
-      margin-bottom: .5rem;
-      font-size: 1.15rem;
+    .fomo {
+      background:linear-gradient(135deg,var(--navy),var(--charcoal));
+      border-left:4px solid var(--yellow);
+      padding:1.5rem;
+      margin:1.5rem 0;
+      border-radius:var(--radius);
     }
 
-    .card p {
-      color: var(--color-text-secondary);
-      font-size: .95rem;
+    .badge {
+      display:inline-block;
+      background:rgba(220,38,38,.15);
+      color:var(--red);
+      padding:.35rem .7rem;
+      border-radius:999px;
+      font-size:.8rem;
+      font-weight:700;
     }
 
-    /* =====================
-       OFFER SECTION
-    ====================== */
-    .offer {
-      text-align: center;
-      background: linear-gradient(135deg, var(--color-bg-primary), var(--color-bg-secondary));
-      border-top: 1px solid rgba(255,255,255,.08);
-    }
-
-    .offer h2 {
-      font-size: clamp(1.75rem, 3vw, 2.4rem);
-    }
-
-    .offer-note {
-      color: var(--color-danger);
-      font-weight: 700;
-      margin: .75rem 0 1.5rem;
-    }
-
-    /* =====================
-       FOOTER
-    ====================== */
     footer {
-      background-color: var(--color-bg-secondary);
-      padding: 1.75rem;
-      text-align: center;
-      font-size: .85rem;
-      color: var(--color-text-muted);
+      background:var(--charcoal);
+      text-align:center;
+      padding:2rem 1rem;
+      font-size:.85rem;
+      color:var(--muted);
     }
   </style>
 </head>
 
 <body>
 
-  <!-- =====================
-       HERO
-  ====================== -->
-  <header class="container">
-    <h1>Stock Market: A Self-Explanatory Guide to Candlestick and Chart Patterns</h1>
+<!-- HERO -->
+<section class="hero container">
+  <span class="badge">ONLY FOR COMPLETE BEGINNERS</span>
+  <h1>Stock Market: A Self-Explanatory Guide to Candlestick and Chart Patterns</h1>
 
-    <p class="hero-text">
-      Learn how price actually moves in the market. This ebook explains candlestick
-      and chart patterns in a simple, logical, beginner-first way — without indicators
-      overload or paid-course confusion.
+  <p style="max-width:720px;margin:auto">
+    If stock market charts look confusing, random, or overwhelming — this guide was written for you.
+    No indicators. No strategies. No trading pressure. Just understanding how price actually moves.
+  </p>
+
+  <div class="fomo">
+    <strong>FOMO check:</strong><br>
+    Have you ever watched the market move and thought —  
+    “Everyone else seems to understand this… why don’t I?”
+  </div>
+
+  <a href="#buy" class="btn">Get the Beginner Guide for ₹99</a>
+
+  <div class="price">
+    <del>₹499</del><span>₹99 Only</span>
+  </div>
+</section>
+
+<!-- PAIN -->
+<section class="dark">
+  <div class="container">
+    <h2>Why Most Beginners Feel Lost in the Stock Market</h2>
+    <div class="grid">
+      <div class="card"><p>Charts look random because no one explains price behavior from the ground up.</p></div>
+      <div class="card"><p>You learn indicators before understanding support, resistance, or trends.</p></div>
+      <div class="card"><p>YouTube videos assume prior knowledge you never had.</p></div>
+      <div class="card"><p>You end up copying trades instead of understanding the market.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section>
+  <div class="container">
+    <h2>What This Guide Does Differently</h2>
+
+    <p>
+      This ebook starts exactly where beginners struggle — not with trades,
+      but with <strong>how the stock market works, how price moves, and how charts communicate information</strong>.
     </p>
 
-    <a href="#buy" class="btn-primary" aria-label="Buy the ₹99 stock market ebook">
-      Get the ₹99 Ebook
-    </a>
-
-    <div class="price-box">
-      <span class="price-old">₹499</span>
-      <span class="price-new">₹99 Only</span>
+    <div class="fomo">
+      What if charts were never random — and you just weren’t taught how to read them properly?
     </div>
-  </header>
+  </div>
+</section>
 
-  <!-- =====================
-       FEATURES
-  ====================== -->
-  <section class="features">
-    <div class="container grid">
-      <article class="card">
-        <h3>📊 Candlestick Patterns Explained</h3>
-        <p>Understand bullish, bearish, and reversal candles using real market logic.</p>
-      </article>
-
-      <article class="card">
-        <h3>📈 Chart Patterns Made Simple</h3>
-        <p>Head & Shoulder, Flags, Triangles — explained visually and practically.</p>
-      </article>
-
-      <article class="card">
-        <h3>🧠 Beginner-First Learning</h3>
-        <p>No jargon, no noise. Perfect if you are starting or restarting trading.</p>
-      </article>
-
-      <article class="card">
-        <h3>💰 Learn Before You Risk Money</h3>
-        <p>Build clarity and confidence before placing real trades.</p>
-      </article>
+<!-- CONTENT MAPPED -->
+<section class="dark">
+  <div class="container">
+    <h2>What You’ll Learn (Directly From the Guide)</h2>
+    <div class="grid">
+      <div class="card"><h3>Stock Market Basics</h3><p>What markets are, why shares exist, and how trading actually happens.</p></div>
+      <div class="card"><h3>Support & Resistance</h3><p>Why price stops, reverses, or reacts at certain levels.</p></div>
+      <div class="card"><h3>Candlestick Reading</h3><p>How bullish, bearish, and indecision candles reflect buyer–seller behavior.</p></div>
+      <div class="card"><h3>Chart Patterns</h3><p>Trend continuation, reversal, and indecisive patterns explained visually.</p></div>
+      <div class="card"><h3>Market Trends</h3><p>Uptrend, downtrend, sideways — and why trading blindly fails.</p></div>
+      <div class="card"><h3>Beginner Risk Awareness</h3><p>Why paper trading, patience, and understanding come before money.</p></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- =====================
-       OFFER
-  ====================== -->
-  <section class="offer" id="buy">
-    <div class="container">
-      <h2>Get Instant Access for Just ₹99</h2>
-      <p class="offer-note">Limited-time price · Will increase soon</p>
+<!-- WHO IT IS FOR -->
+<section>
+  <div class="container">
+    <h2>This Guide Is For You If…</h2>
+    <ul>
+      <li>You are completely new to stock market charts</li>
+      <li>You want to understand price before placing trades</li>
+      <li>You feel overwhelmed by indicators and strategies</li>
+      <li>You want clarity, not shortcuts</li>
+    </ul>
 
-      <a href="#" class="btn-primary">
-        Download Now
-      </a>
-    </div>
-  </section>
+    <h3 style="margin-top:2rem">This Guide Is NOT For You If…</h3>
+    <ul>
+      <li>You already trade daily or use advanced indicators</li>
+      <li>You are looking for signals, tips, or guaranteed profits</li>
+    </ul>
+  </div>
+</section>
 
-  <!-- =====================
-       FOOTER
-  ====================== -->
-  <footer>
-    © 2026 · Stock Market Guidebook · Educational Use Only · No Investment Advice
-  </footer>
+<!-- OFFER -->
+<section class="dark" id="buy">
+  <div class="container" style="text-align:center">
+    <h2>Start Understanding Charts — Without Risk</h2>
+    <p>Priced at ₹99 so beginners can learn without hesitation.</p>
+    <p style="color:var(--red);font-weight:700">Limited-time price · Will increase</p>
+    <a href="#" class="btn">Download the Beginner Guide</a>
+  </div>
+</section>
+
+<footer>
+  © 2026 · Educational Purpose Only · No Trading Advice<br>
+  Built for first-time learners
+</footer>
 
 </body>
 </html>
