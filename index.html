@@ -231,6 +231,25 @@
     </ul>
   </div>
 </section>
+<!-- FINAL CTA -->
+<section class="dark">
+  <div class="container" style="text-align:center;">
+    <h2>Still Confused by Stock Market Charts?</h2>
+
+    <p style="max-width:720px;margin:1rem auto 2rem;">
+      You don’t need strategies or indicators yet.
+      You need clarity. This guide explains charts from absolute zero.
+    </p>
+
+    <a href="#downloadBtn" class="btn">
+      Download the Free Beginner Guide
+    </a>
+
+    <p class="timer" style="margin-top:1rem;">
+      Free access ends in <span id="countdownBottom">10:00</span>
+    </p>
+  </div>
+</section>
 
 <footer>
   © 2026 · Educational Purpose Only · No Trading Advice<br>
@@ -238,6 +257,7 @@
 </footer>
 
 <script>
+  const countdownBottomEl = document.getElementById("countdownBottom");
   let time = 600; // 10 minutes
   const countdownEl = document.getElementById("countdown");
   const btn = document.getElementById("downloadBtn");
@@ -246,6 +266,9 @@
     const min = String(Math.floor(time / 60)).padStart(2, "0");
     const sec = String(time % 60).padStart(2, "0");
     countdownEl.textContent = `${min}:${sec}`;
+if (countdownBottomEl) {
+  countdownBottomEl.textContent = `${min}:${sec}`;
+}
 
     if (time <= 0) {
       clearInterval(timer);
