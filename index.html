@@ -329,46 +329,23 @@ window.addEventListener("scroll", () => {
   const scrollPercent = (scrollTop / docHeight) * 100;
   scrollProgress.style.width = `${scrollPercent}%`;
 });
-const scrollTopBtn = document.getElementById("scrollTopBtn");
+document.addEventListener("DOMContentLoaded", () => {
+  const scrollTopBtnFixed = document.getElementById("scrollTopBtn");
 
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 400) {
-    scrollTopBtn.style.display = "flex";
-  } else {
-    scrollTopBtn.style.display = "none";
-  }
-});
+  if (!scrollTopBtnFixed) return;
 
-scrollTopBtn.addEventListener("click", () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
+  window.addEventListener("scroll", () => {
+    scrollTopBtnFixed.style.display =
+      window.scrollY > 400 ? "flex" : "none";
+  });
+
+  scrollTopBtnFixed.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
   });
 });
-// Unified scroll handler (safe)
-window.addEventListener("scroll", () => {
-  /* Scroll progress bar */
-  const scrollProgress = document.getElementById("scrollProgress");
-  if (scrollProgress) {
-    const scrollTop = window.scrollY;
-    const docHeight =
-      document.documentElement.scrollHeight - window.innerHeight;
-    const scrollPercent = (scrollTop / docHeight) * 100;
-    scrollProgress.style.width = `${scrollPercent}%`;
-  }
-
-  /* Scroll to top button */
-  const scrollTopBtn = document.getElementById("scrollTopBtn");
-  if (scrollTopBtn) {
-    if (window.scrollY > 400) {
-      scrollTopBtn.style.display = "flex";
-    } else {
-      scrollTopBtn.style.display = "none";
-    }
-  }
-});
-
-
 </script>
  <button id="scrollTopBtn" aria-label="Scroll to top">↑</button>
 </body>
