@@ -160,8 +160,6 @@
 
 <body>
   <div id="scrollProgress"></div>
-
-
 <!-- HERO -->
 <section class="hero container">
   <span class="badge">ONLY FOR COMPLETE BEGINNERS</span>
@@ -347,9 +345,31 @@ scrollTopBtn.addEventListener("click", () => {
     behavior: "smooth"
   });
 });
+// Unified scroll handler (safe)
+window.addEventListener("scroll", () => {
+  /* Scroll progress bar */
+  const scrollProgress = document.getElementById("scrollProgress");
+  if (scrollProgress) {
+    const scrollTop = window.scrollY;
+    const docHeight =
+      document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = (scrollTop / docHeight) * 100;
+    scrollProgress.style.width = `${scrollPercent}%`;
+  }
+
+  /* Scroll to top button */
+  const scrollTopBtn = document.getElementById("scrollTopBtn");
+  if (scrollTopBtn) {
+    if (window.scrollY > 400) {
+      scrollTopBtn.style.display = "flex";
+    } else {
+      scrollTopBtn.style.display = "none";
+    }
+  }
+});
 
 
 </script>
-  <button id="scrollTopBtn" aria-label="Scroll to top">↑</button>
+ <button id="scrollTopBtn" aria-label="Scroll to top">↑</button>
 </body>
 </html>
