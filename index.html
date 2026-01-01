@@ -8,12 +8,12 @@
 
   <title>Stock Market: A Self-Explanatory Guide to Candlestick and Chart Patterns</title>
 
-  <meta name="description" content="A pure beginner’s guide to understanding stock market charts, candlesticks, and patterns without confusion. No indicators. No strategies. Just clarity. FREE for limited time.">
+  <meta name="description" content="A pure beginner’s guide to understanding stock market charts, candlesticks, and patterns without confusion. No indicators. No strategies. Just clarity.">
 
   <!-- OPEN GRAPH -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Stock Market: A Self-Explanatory Guide">
-  <meta property="og:description" content="If charts confuse you, this beginner-only guide explains them clearly. Learn candlesticks and chart patterns from scratch.">
+  <meta property="og:description" content="If charts confuse you, this beginner-only guide explains them clearly.">
   <meta property="og:image" content="/og-image.png">
 
   <style>
@@ -58,19 +58,26 @@
       border-radius:var(--radius);
       font-weight:700;
       transition:.15s;
+      cursor:pointer;
     }
     .btn:hover { background:var(--yellow-hover); transform:translateY(-2px); }
+
     .btn.disabled {
-      background:var(--muted);
-      color:#111;
+      background:#555;
+      cursor:not-allowed;
       pointer-events:none;
-      transform:none;
     }
 
     .hero { text-align:center; padding-top:5.5rem; }
     .price { margin-top:1rem; font-size:1.1rem; }
     .price del { color:var(--muted); margin-right:.5rem; }
     .price span { color:var(--green); font-size:1.5rem; font-weight:800; }
+
+    .timer {
+      margin-top:1rem;
+      font-weight:700;
+      color:var(--red);
+    }
 
     .dark { background:var(--charcoal); }
 
@@ -105,12 +112,6 @@
       font-weight:700;
     }
 
-    .timer {
-      margin-top:1rem;
-      font-weight:700;
-      color:var(--red);
-    }
-
     footer {
       background:var(--charcoal);
       text-align:center;
@@ -139,30 +140,29 @@
     “Everyone else seems to understand this… why don’t I?”
   </div>
 
-  <!-- DOWNLOAD BUTTON -->
+  <!-- ADDED: DOWNLOAD BUTTON -->
   <a
     id="downloadBtn"
     href="Stock Market: A Self-Explanatory Guide to Candlestick and Chart Patterns.pdf"
-    class="btn"
     download
+    class="btn"
   >
-    Download FREE Guide
+    Download FREE (10 mins)
   </a>
 
-  <div class="price">
-    <del>₹99</del><span>FREE (Limited Time)</span>
-  </div>
+  <!-- ADDED: TIMER -->
+  <div id="timer" class="timer">Free access ends in 10:00</div>
 
-  <div id="timer" class="timer">
-    Free access ends in 10:00
+  <div class="price">
+    <del>₹499</del><span>FREE for now</span>
   </div>
 </section>
 
 <!-- OFFER -->
-<section class="dark">
+<section class="dark" id="buy">
   <div class="container" style="text-align:center">
-    <h2>Free for Beginners — For a Few Minutes Only</h2>
-    <p>Download now and learn calmly before risking real money.</p>
+    <h2>Start Understanding Charts — Without Risk</h2>
+    <p>This guide is temporarily free for new learners.</p>
   </div>
 </section>
 
@@ -171,28 +171,29 @@
   Built for first-time learners
 </footer>
 
-<!-- COUNTDOWN SCRIPT -->
+<!-- ADDED: COUNTDOWN SCRIPT -->
 <script>
-  let time = 600; // 10 minutes in seconds
+  let timeLeft = 600; // 10 minutes in seconds
   const timerEl = document.getElementById("timer");
   const btn = document.getElementById("downloadBtn");
 
   const countdown = setInterval(() => {
-    const minutes = Math.floor(time / 60);
-    const seconds = time % 60;
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
 
     timerEl.textContent =
-      `Free access ends in ${minutes}:${seconds.toString().padStart(2, "0")}`;
+      "Free access ends in " +
+      minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
 
-    if (time <= 0) {
+    timeLeft--;
+
+    if (timeLeft < 0) {
       clearInterval(countdown);
       timerEl.textContent = "Free access expired";
-      btn.textContent = "Free period ended";
       btn.classList.add("disabled");
+      btn.textContent = "Offer Expired";
       btn.removeAttribute("href");
     }
-
-    time--;
   }, 1000);
 </script>
 
