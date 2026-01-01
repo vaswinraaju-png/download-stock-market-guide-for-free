@@ -130,6 +130,31 @@
   z-index: 9999;
   transition: width 0.1s linear;
 }
+/* Scroll To Top Button */
+#scrollTopBtn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--yellow);
+  color: var(--navy);
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 900;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,.35);
+  z-index: 9999;
+  transition: transform .2s ease, opacity .2s ease;
+}
+
+#scrollTopBtn:hover {
+  transform: translateY(-4px);
+}
 
   </style>
 </head>
@@ -307,7 +332,25 @@ window.addEventListener("scroll", () => {
   const scrollPercent = (scrollTop / docHeight) * 100;
   scrollProgress.style.width = `${scrollPercent}%`;
 });
+const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 400) {
+    scrollTopBtn.style.display = "flex";
+  } else {
+    scrollTopBtn.style.display = "none";
+  }
+});
+
+scrollTopBtn.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+});
 
 </script>
+  <button id="scrollTopBtn" aria-label="Scroll to top">↑</button>
+
 </body>
 </html>
