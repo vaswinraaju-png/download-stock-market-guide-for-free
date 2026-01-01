@@ -173,10 +173,9 @@
   </div>
 
   <a
-    id="downloadBtn"
     href="Stock Market_ A Self-Explanatory Guide to Candlestick and Chart Patterns.pdf"
     download="Stock Market_ A Self-Explanatory Guide to Candlestick and Chart Patterns.pdf"
-    class="btn"
+    class="btn downloadBtn"
   >
     Download FREE (Limited Time)
   </a>
@@ -207,6 +206,7 @@
 <section>
   <div class="container">
     <h2>What This Guide Does Differently</h2>
+
     <p>
       This ebook starts exactly where beginners struggle — not with trades,
       but with <strong>how the stock market works, how price moves, and how charts communicate information</strong>.
@@ -218,8 +218,9 @@
 
     <div style="margin-top:2rem;text-align:center;">
       <a
-        href="#downloadBtn"
-        class="btn"
+        href="Stock Market_ A Self-Explanatory Guide to Candlestick and Chart Patterns.pdf"
+        download="Stock Market_ A Self-Explanatory Guide to Candlestick and Chart Patterns.pdf"
+        class="btn downloadBtn"
       >
         Start Understanding Charts — Download Free Guide
       </a>
@@ -246,14 +247,24 @@
 <section class="dark">
   <div class="container" style="text-align:center;">
     <h2>Still Confused by Stock Market Charts?</h2>
+
+    <p style="max-width:720px;margin:1rem auto 2rem;">
+      You don’t need strategies, indicators, or tips right now.
+      You need clarity. This guide was written to explain charts from absolute zero —
+      without pressure, without noise, and without false promises.
+    </p>
+
     <a
       href="Stock Market_ A Self-Explanatory Guide to Candlestick and Chart Patterns.pdf"
       download="Stock Market_ A Self-Explanatory Guide to Candlestick and Chart Patterns.pdf"
-      class="btn"
+      class="btn downloadBtn"
     >
-      Download FREE (Limited Time)
+      Download the Free Beginner Guide
     </a>
-    <p class="timer">Free access ends in <span id="countdownBottom">10:00</span></p>
+
+    <p class="timer">
+      Free access ends in <span id="countdownBottom">10:00</span>
+    </p>
   </div>
 </section>
 
@@ -269,7 +280,7 @@
   let time = 600;
   const countdown = document.getElementById("countdown");
   const countdownBottom = document.getElementById("countdownBottom");
-  const btn = document.getElementById("downloadBtn");
+  const downloadBtns = document.querySelectorAll(".downloadBtn");
 
   setInterval(() => {
     const m = String(Math.floor(time / 60)).padStart(2,"0");
@@ -279,8 +290,10 @@
     if (countdownBottom) countdownBottom.textContent = `${m}:${s}`;
 
     if (time <= 0) {
-      btn.textContent = "Free access ended";
-      btn.classList.add("disabled");
+      downloadBtns.forEach(btn => {
+        btn.textContent = "Free access ended";
+        btn.classList.add("disabled");
+      });
     }
 
     time--;
