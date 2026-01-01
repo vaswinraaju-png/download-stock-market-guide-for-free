@@ -328,25 +328,8 @@ window.addEventListener("scroll", () => {
   const docHeight = document.documentElement.scrollHeight - window.innerHeight;
   const scrollPercent = (scrollTop / docHeight) * 100;
   scrollProgress.style.width = `${scrollPercent}%`;
-});
-document.addEventListener("DOMContentLoaded", () => {
-  const scrollTopBtnFixed = document.getElementById("scrollTopBtn");
-
-  if (!scrollTopBtnFixed) return;
-
-  window.addEventListener("scroll", () => {
-    scrollTopBtnFixed.style.display =
-      window.scrollY > 400 ? "flex" : "none";
-  });
-
-  scrollTopBtnFixed.addEventListener("click", () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
   });
 });
 </script>
- <button id="scrollTopBtn" aria-label="Scroll to top">↑</button>
 </body>
 </html>
